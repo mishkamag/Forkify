@@ -29,8 +29,19 @@ const controlRecipe = async () => {
   const id = window.location.hash.replace("#", "");
 
   if (id) {
+    recipeView.clearRecipe();
+    renderLoader(elements.recipe);
+
+    state.search && searchView.activeLinkStyle(id);
     state.recipe = new Recipe(id);
-    await state.recipe.getRecipe();
+
+    try {
+      await state.recipe.getRecipe();
+    } catch (error) {
+      alert("Recipe error");
+    }
+
+    clearLoader();
     recipeView.renderRecipe(state.recipe);
   }
 };
@@ -51,5 +62,9 @@ elements.searchResPages.addEventListener("click", (e) => {
 });
 
 window.addEventListener("hashchange", () => {
+  controlRecipe();
+});
+
+window.addEventListener("load", () => {
   controlRecipe();
 });

@@ -7,6 +7,17 @@ export const clearResults = () => {
   elements.searchResPages.innerHTML = "";
 }; //მარცხნივ ლი ტეგების გასუფუთავება
 
+export const activeLinkStyle = (id) => {
+  //ჰოვერის დატოვება და მოშლა აქტივ პროდუქტზე
+  const resArr = [...document.querySelectorAll(".results__link")];
+
+  resArr.forEach((el) => el.classList.remove("results__link--active"));
+
+  document
+    .querySelector(`a[href="#${id}"]`)
+    .classList.add("results__link--active");
+};
+
 const convertTitle = (title, limit = 17) => {
   //მარცხნივ პროდუქტის დასახელებების სიგრძის დათვლა
   const newTitle = [];
