@@ -1,7 +1,9 @@
 // Global app controller
+import Recipe from "./models/recipe";
 import Search from "./models/Search";
 import { clearLoader, elements, renderLoader } from "./views/base";
 import * as searchView from "./views/searchView";
+import * as recipeView from "./views/recipeView";
 
 const state = {};
 window.state = state;
@@ -21,6 +23,18 @@ const controlSearch = async () => {
   }
 };
 
+//Recipe
+
+const controlRecipe = async () => {
+  const id = window.location.hash.replace("#", "");
+
+  if (id) {
+    state.recipe = new Recipe(id);
+    await state.recipe.getRecipe();
+    recipeView.renderRecipe(state.recipe);
+  }
+};
+
 elements.searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
   controlSearch();
@@ -34,4 +48,8 @@ elements.searchResPages.addEventListener("click", (e) => {
     searchView.clearResults();
     searchView.rederResult(state.search.result, goToPage);
   }
+});
+
+window.addEventListener("hashchange", () => {
+  controlRecipe();
 });
