@@ -19,4 +19,31 @@ export default class Recipe {
       alert(error);
     }
   }
+
+  parseIngredients() {
+    const newIngredients = this.ingredients.map((el) => {
+      const unitsLong = [
+        "tablespoons",
+        "tablespoon",
+        "ounces",
+        "ounce",
+        "teaspoons",
+        "teaspoon",
+        "cups",
+      ];
+      const unitsShort = ["tbsp", "tbsp", "oz", "oz", "tsp", "tsp", "cup"];
+
+      //uniform units (აბრევიატურებით შეცვლა ზედა ერეის წევრებისთვის)
+      let ingredient = el.toLowerCase();
+      unitsLong.forEach((unit, index) => {
+        ingredient = ingredient.replace(unit, unitsShort[index]);
+      });
+
+      //ფრჩხილების ამოშლა
+      ingredient = ingredient.replace(/ *\(([^)]*)\) */g, " ");
+
+      return ingredient;
+    });
+    this.ingredients = newIngredients;
+  }
 }

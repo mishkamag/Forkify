@@ -29,10 +29,13 @@ const controlRecipe = async () => {
   const id = window.location.hash.replace("#", "");
 
   if (id) {
+    //prepare UI
     recipeView.clearRecipe();
     renderLoader(elements.recipe);
 
     state.search && searchView.activeLinkStyle(id);
+
+    // Create new Recipe object
     state.recipe = new Recipe(id);
 
     try {
@@ -40,6 +43,8 @@ const controlRecipe = async () => {
     } catch (error) {
       alert("Recipe error");
     }
+
+    state.recipe.parseIngredients();
 
     clearLoader();
     recipeView.renderRecipe(state.recipe);
