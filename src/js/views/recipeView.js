@@ -99,3 +99,15 @@ export const renderRecipe = (recipe) => {
 
   elements.recipe.insertAdjacentHTML("afterbegin", markup);
 };
+
+export const updateServingIngredient = (recipe) => {
+  //კლიენტების რაოდენობის ზრდა
+  document.querySelector(".recipe__info-data--people").textContent =
+    recipe.servings;
+
+  //ინგრედიენტების ზრდა
+  const countsElements = [...document.querySelectorAll(".recipe__count")]; //ნოუდ ლისტი მასივად გადაკეთება
+  countsElements.forEach((el, index) => {
+    el.textContent = recipe.ingredients[index].count;
+  });
+};
