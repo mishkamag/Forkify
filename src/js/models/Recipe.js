@@ -42,6 +42,8 @@ export default class Recipe {
       //ფრჩხილების ამოშლა
       ingredient = ingredient.replace(/ *\(([^)]*)\) */g, " ");
 
+      //სტრინგის დაკონვერტება ობჯექტად
+
       return ingredient;
     });
     this.ingredients = newIngredients;

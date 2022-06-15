@@ -10,7 +10,7 @@ const createIngredient = (ingredient) =>
         </svg>
         <div class="recipe__count">count</div>
         <div class="recipe__ingredient">
-            <span class="recipe__unit">unit/span>
+            <span class="recipe__unit">unit</span>
             ${ingredient}
         </div>
     </li>
