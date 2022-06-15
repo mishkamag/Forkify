@@ -33,6 +33,8 @@ export default class Recipe {
       ];
       const unitsShort = ["tbsp", "tbsp", "oz", "oz", "tsp", "tsp", "cup"];
 
+      const units = [...unitsShort, "g", "kg", "pound"];
+
       //uniform units (აბრევიატურებით შეცვლა ზედა ერეის წევრებისთვის)
       let ingredient = el.toLowerCase();
       unitsLong.forEach((unit, index) => {
@@ -43,8 +45,43 @@ export default class Recipe {
       ingredient = ingredient.replace(/ *\(([^)]*)\) */g, " ");
 
       //სტრინგის დაკონვერტება ობჯექტად
+      const ingArr = ingredient.split(" ");
+      const unitIndex = ingArr.findIndex((word) => units.includes(word));
 
-      return ingredient;
+      let objIng = {
+        count: "",
+        unit: "",
+        ingArr: "",
+      };
+      if (unitIndex > -1) {
+        const arrCount = ingArr.slice(0, unitIndex);
+
+        let count;
+        if (arrCount.length === 1) {
+          count = eval(arrCount[0]);
+        } else {
+          count = eval(arrCount.join("+"));
+        }
+        objIng = {
+          count, //count რადგან არის პროფერთიც და ვალიუც
+          unit: ingArr[unitIndex],
+          ingredient: ingArr.slice(unitIndex + 1).join(" "),
+        };
+      } else if (+ingArr[0]) {
+        objIng = {
+          count: +ingArr[0],
+          unit: "",
+          ingredient: ingArr.slice(1).join(" "),
+        };
+      } else if (unitIndex === -1) {
+        objIng = {
+          count: 1,
+          unit: "",
+          ingredient,
+        };
+      }
+
+      return objIng;
     });
     this.ingredients = newIngredients;
   }
