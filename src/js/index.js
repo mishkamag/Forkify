@@ -77,3 +77,13 @@ window.addEventListener("hashchange", () => {
 window.addEventListener("load", () => {
   controlRecipe();
 });
+
+elements.recipe.addEventListener("click", (e) => {
+  if (e.target.matches(".btn-decrease, .btn-decrease *")) {
+    //ღილაკი მომატება
+    console.log("-");
+  } else if (e.target.matches(".btn-increase, .btn-increase *")) {
+    //ღილაკი მოკლება
+    console.log("+");
+  }
+});
