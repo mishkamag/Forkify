@@ -22,6 +22,10 @@ const controlSearch = async () => {
     searchView.rederResult(state.search.result);
   }
 };
+//shoping list section
+const controlList = () => {
+  c;
+};
 
 //Recipe
 
@@ -80,7 +84,7 @@ window.addEventListener("load", () => {
 
 elements.recipe.addEventListener("click", (e) => {
   if (e.target.matches(".btn-decrease, .btn-decrease *")) {
-    //ღილაკი მომატება
+    //ღილაკი მომატება (მეტჩი ყილკიზე ან მისი ჩაილდებზე )
     if (state.recipe.servings > 1) {
       state.recipe.updateServingIngredient("dec");
       recipeView.updateServingIngredient(state.recipe);
@@ -89,5 +93,8 @@ elements.recipe.addEventListener("click", (e) => {
     //ღილაკი მოკლება
     state.recipe.updateServingIngredient("inc");
     recipeView.updateServingIngredient(state.recipe);
+  } else if (e.target.matches(".recipe__btn__add, .recipe__btn__add *")) {
+    //shoping list
+    controlList();
   }
 });
