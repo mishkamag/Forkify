@@ -4,6 +4,8 @@ import Search from "./models/Search";
 import { clearLoader, elements, renderLoader } from "./views/base";
 import * as searchView from "./views/searchView";
 import * as recipeView from "./views/recipeView";
+import List from "./models/list";
+import * as listView from "./views/listView";
 
 const state = {};
 window.state = state;
@@ -24,7 +26,14 @@ const controlSearch = async () => {
 };
 //shoping list section
 const controlList = () => {
-  c;
+  //create new list
+  if (!state.list) state.list = new List();
+
+  //add each ingredient
+  state.recipe.ingredients.forEach((el) => {
+    const item = state.list.addItems(el.count, el.unit, el.ingredient);
+    listView.renderItem(item);
+  });
 };
 
 //Recipe
