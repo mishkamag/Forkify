@@ -29,6 +29,8 @@ const controlList = () => {
   //create new list
   if (!state.list) state.list = new List();
 
+  listView.clearShoppingList(); //წაშლა ლისტის
+
   //add each ingredient
   state.recipe.ingredients.forEach((el) => {
     const item = state.list.addItems(el.count, el.unit, el.ingredient);
@@ -36,8 +38,23 @@ const controlList = () => {
   });
 };
 
-//Recipe
+//Handle delete and update list
+elements.shoping.addEventListener("click", (e) => {
+  const id = e.target.closest(".shopping__item").dataset.itemid;
+  console.log(id);
 
+  if (e.target.matches(".shopping__delete, .shopping__delete *")) {
+    //delete items
+    state.list.deleteItem(id);
+    listView.deleteItem(id);
+  } else if (e.target.matches(".shopping__count__input")) {
+    //udpade items
+    const newValue = +e.target.value;
+    state.list.updateItem(id, newValue);
+  }
+});
+
+//Recipe
 const controlRecipe = async () => {
   const id = window.location.hash.replace("#", "");
 
