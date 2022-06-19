@@ -6,6 +6,7 @@ import * as searchView from "./views/searchView";
 import * as recipeView from "./views/recipeView";
 import List from "./models/list";
 import * as listView from "./views/listView";
+import Like from "./models/like";
 
 const state = {};
 window.state = state;
@@ -24,6 +25,13 @@ const controlSearch = async () => {
     searchView.rederResult(state.search.result);
   }
 };
+//Heart icon (ლაიქების თემა)
+const controlLike = () => {
+  state.likes = new Like();
+
+  const curnetId = state.recipe.i;
+};
+
 //shoping list section
 const controlList = () => {
   //create new list
@@ -122,5 +130,8 @@ elements.recipe.addEventListener("click", (e) => {
   } else if (e.target.matches(".recipe__btn__add, .recipe__btn__add *")) {
     //shoping list
     controlList();
+  } else if (e.target.matches(".recipe__love, .recipe__love *")) {
+    //Like controler
+    controlLike();
   }
 });
