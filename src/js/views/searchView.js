@@ -18,7 +18,7 @@ export const activeLinkStyle = (id) => {
     .classList.add("results__link--active");
 };
 
-const convertTitle = (title, limit = 17) => {
+export const convertTitle = (title, limit = 17) => {
   //მარცხნივ პროდუქტის დასახელებების სიგრძის დათვლა
   const newTitle = [];
   if (title.length > limit) {
