@@ -53,7 +53,6 @@ const controlLike = () => {
 
     likesView.deleteLike(currentId);
   }
-  likesView.toggleLikeMenu(state.likes.getNumLikes());
 };
 
 //shoping list section
@@ -143,7 +142,7 @@ window.addEventListener("load", () => {
   state.likes.readStorage();
 
   state.likes.likes.forEach((like) => likesView.renderLike(like));
-  likesView.toggleLikeMenu(state.likes.getNumLikes());
+
   controlRecipe();
 });
 
